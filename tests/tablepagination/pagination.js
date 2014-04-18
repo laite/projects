@@ -19,14 +19,14 @@ var itemsPerPage = 5;
 function populateTable() {
 
 	/* empty current table and append headers */
-	$(document.getElementById(tableId)).empty().append(headers);
+	$(document.getElementById(tableIdName)).html(headers);
 
 	/* Calculate the amount of items visible */
 	var amount = Math.min(tableData.length - (currentPage*itemsPerPage), itemsPerPage);
 
 	/* Add items to actual table */
 	for (var i = 0; i < amount; i++) {
-		$(document.getElementById(tableId)).append(tableData[(currentPage*itemsPerPage) + i]);
+		$(document.getElementById(tableIdName)).append(tableData[(currentPage*itemsPerPage) + i]);
 	}
 }
 
@@ -70,6 +70,6 @@ $(document).ready(function() {
 
 	/* Set initial page and show table */
 	changePage(currentPage);
-	$(document.getElementById(tableId)).show();
+	$(document.getElementById(tableIdName)).show();
 
 });
