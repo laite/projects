@@ -1,6 +1,6 @@
 /*
  *
- * Table paginatio script
+ * Table pagination script
  *
  * Author: Markus Klinga 2014
  * Licence: Public domain
