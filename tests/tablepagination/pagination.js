@@ -21,6 +21,16 @@ function changePage(pageNum) {
 
 	$('#currentPage').html("Page " + (1 + currentPage) + " of " + Math.ceil(tableData.length/itemsPerPage));
 	populateTable();
+
+	if (currentPage === 0)
+		$('#prevPage').addClass('disabled');
+	else
+		$('#prevPage').removeClass('disabled');
+
+	if (tableData.length <= (currentPage+1)*itemsPerPage)
+		$('#nextPage').addClass('disabled');
+	else
+		$('#nextPage').removeClass('disabled');
 }
 
 $(document).ready(function() {
@@ -35,11 +45,6 @@ $(document).ready(function() {
 		}
 	});
 
-	changePage(0);
-
-	/* on first load, full table is hidden */
-	$('table').show();
-
 	$('#nextPage').click(function() {
 		if (tableData.length <= (currentPage+1)*itemsPerPage)
 			return;
@@ -53,4 +58,9 @@ $(document).ready(function() {
 
 		changePage(currentPage-1);
 	});
+
+	/* Set initial page and show table */
+	changePage(0);
+	$('table').show();
+
 });
