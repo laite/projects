@@ -35,6 +35,18 @@ $(document).ready(function() {
 	$('table').show();
 
 	$('#nextPage').click(function() {
+		if (tableData.length <= (currentPage+1)*itemsPerPage)
+			return;
 
+		currentPage++;
+		populateTable();
+	});
+
+	$('#prevPage').click(function() {
+		if (currentPage === 0)
+			return;
+
+		currentPage--;
+		populateTable();
 	});
 });
