@@ -14,7 +14,13 @@ function populateTable() {
 	for (var i = 0; i < amount; i++) {
 		$('table').append(tableData[(currentPage*itemsPerPage) + i]);
 	}
+}
 
+function changePage(pageNum) {
+	currentPage = pageNum;
+
+	$('#currentPage').html("Page " + (1 + currentPage) + " of " + Math.ceil(tableData.length/itemsPerPage));
+	populateTable();
 }
 
 $(document).ready(function() {
@@ -29,7 +35,7 @@ $(document).ready(function() {
 		}
 	});
 
-	populateTable();
+	changePage(0);
 
 	/* on first load, full table is hidden */
 	$('table').show();
@@ -38,15 +44,13 @@ $(document).ready(function() {
 		if (tableData.length <= (currentPage+1)*itemsPerPage)
 			return;
 
-		currentPage++;
-		populateTable();
+		changePage(currentPage+1);
 	});
 
 	$('#prevPage').click(function() {
 		if (currentPage === 0)
 			return;
 
-		currentPage--;
-		populateTable();
+		changePage(currentPage-1);
 	});
 });
