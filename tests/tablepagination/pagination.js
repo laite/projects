@@ -5,17 +5,36 @@
  * Author: Markus Klinga 2014
  * Licence: Public domain
  *
+ * Table - function expects id for <div> in which there is a <table>
+ *
+ * It also looks for the following in the same div:
+ *
+ * .currentPage - to hold information about position
+ * .prevPage	- link to previous page
+ * .nextPage	- link to next page
+ *
  */
 
+var Defaults = {
+	/* When next/prev link can't go further this classname is added to that element */
+	disabledClass: 'disabled',
 
+	/* Page number to show at first (starts from zero) */
+	startPage: 0,
+
+	/* How many <tr> items are shown at once */
+	itemsPerPage: 8,
+};
+
+/* Actual Table - object */
 var Table = function(tableId) {
 
 	this.id = tableId;
 
 	this.headers = "";
 	this.tableData = [];
-	this.currentPage = 2;
-	this.itemsPerPage = 5;
+	this.currentPage = Defaults.startPage;
+	this.itemsPerPage = Defaults.itemsPerPage;
 
 	/* Reference to instance to be used below at .each-function */
 	var that = this;
@@ -28,14 +47,18 @@ var Table = function(tableId) {
 			that.tableData.push("<tr>" + $(this).html() + "</tr>");
 	});
 
-	$("#" + this.id + ' .nextPage'). click(function() {
+	$("#" + this.id + ' .nextPage'). click(function(e) {
 		if (that.tableData.length > (that.currentPage+1)*that.itemsPerPage)
 			that.changePage(that.currentPage+1);
+		
+		e.preventDefault();
 	});
 
-	$("#" + this.id + ' .prevPage'). click(function() {
+	$("#" + this.id + ' .prevPage'). click(function(e) {
 		if (that.currentPage !== 0)
 			that.changePage(that.currentPage-1);
+		
+		e.preventDefault();
 	});
 
 	this.populateTable = function() {
@@ -55,17 +78,17 @@ var Table = function(tableId) {
 	this.changePage = function(pageNum) {
 		this.currentPage = pageNum;
 
-		$("#" + this.id + '.currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
+		$("#" + this.id + ' .currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
 
 		if (this.currentPage === 0)
-			$("#" + this.id + ' .prevPage').addClass('disabled');
+			$("#" + this.id + ' .prevPage').addClass(Defaults.disabledClass);
 		else
-			$("#" + this.id + ' .prevPage').removeClass('disabled');
+			$("#" + this.id + ' .prevPage').removeClass(Defaults.disabledClass);
 
 		if (this.tableData.length <= (this.currentPage+1)*this.itemsPerPage)
-			$("#" + this.id + ' .nextPage').addClass('disabled');
+			$("#" + this.id + ' .nextPage').addClass(Defaults.disabledClass);
 		else
-			$("#" + this.id + ' .nextPage').removeClass('disabled');
+			$("#" + this.id + ' .nextPage').removeClass(Defaults.disabledClass);
 
 		this.populateTable();
 	};
@@ -77,6 +100,7 @@ var Table = function(tableId) {
 };
 
 $(window).ready(function() {
+	/* create demo tables and store them on the window */
 	window.myTable1 = new Table('table1');
 	window.myTable2 = new Table('table2');
 });
