@@ -28,44 +28,44 @@ var Table = function(tableId) {
 			that.tableData.push("<tr>" + $(this).html() + "</tr>");
 	});
 
-// 	$('#nextPage').click(function() {
-// 		if (tableData.length > (currentPage+1)*itemsPerPage)
-// 			changePage(currentPage+1);
-// 	});
-//
-// 	$('#prevPage').click(function() {
-// 		if (currentPage !== 0)
-// 			changePage(currentPage-1);
-// 	});
+	$("#" + this.id + ' .nextPage'). click(function() {
+		if (that.tableData.length > (that.currentPage+1)*that.itemsPerPage)
+			that.changePage(that.currentPage+1);
+	});
+
+	$("#" + this.id + ' .prevPage'). click(function() {
+		if (that.currentPage !== 0)
+			that.changePage(that.currentPage-1);
+	});
 
 	this.populateTable = function() {
 
 		/* empty current table and append headers */
-		$(document.getElementById(this.id)).html(this.headers);
+		$("#" + this.id + " table").html(this.headers);
 
 		/* Calculate the amount of items visible */
 		var amount = Math.min(this.tableData.length - (this.currentPage*this.itemsPerPage), this.itemsPerPage);
 
 		/* Add items to actual table */
 		for (var i = 0; i < amount; i++) {
-			$(document.getElementById(this.id)).append(this.tableData[(this.currentPage*this.itemsPerPage) + i]);
+			$("#" + this.id + " table").append(this.tableData[(this.currentPage*this.itemsPerPage) + i]);
 		}
 	};
 
 	this.changePage = function(pageNum) {
 		this.currentPage = pageNum;
 
-		$('#currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
+		$("#" + this.id + '.currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
 
 		if (this.currentPage === 0)
-			$('#prevPage').addClass('disabled');
+			$("#" + this.id + ' .prevPage').addClass('disabled');
 		else
-			$('#prevPage').removeClass('disabled');
+			$("#" + this.id + ' .prevPage').removeClass('disabled');
 
 		if (this.tableData.length <= (this.currentPage+1)*this.itemsPerPage)
-			$('#nextPage').addClass('disabled');
+			$("#" + this.id + ' .nextPage').addClass('disabled');
 		else
-			$('#nextPage').removeClass('disabled');
+			$("#" + this.id + ' .nextPage').removeClass('disabled');
 
 		this.populateTable();
 	};
