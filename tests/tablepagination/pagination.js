@@ -40,21 +40,21 @@ var Table = function(tableId) {
 	var that = this;
 
 	/* Load existing data from table to variable */
-	$("#" + that.id + " tr").each(function() {
-		if ($(this).find('th').html())
-			that.headers = "<tr>" + $(this).html() + "</tr>";
+	jQuery("#" + that.id + " tr").each(function() {
+		if (jQuery(this).find('th').html())
+			that.headers = "<tr>" + jQuery(this).html() + "</tr>";
 		else
-			that.tableData.push("<tr>" + $(this).html() + "</tr>");
+			that.tableData.push("<tr>" + jQuery(this).html() + "</tr>");
 	});
 
-	$("#" + this.id + ' .nextPage'). click(function(e) {
+	jQuery("#" + this.id + ' .nextPage'). click(function(e) {
 		if (that.tableData.length > (that.currentPage+1)*that.itemsPerPage)
 			that.changePage(that.currentPage+1);
 		
 		e.preventDefault();
 	});
 
-	$("#" + this.id + ' .prevPage'). click(function(e) {
+	jQuery("#" + this.id + ' .prevPage'). click(function(e) {
 		if (that.currentPage !== 0)
 			that.changePage(that.currentPage-1);
 		
@@ -64,43 +64,47 @@ var Table = function(tableId) {
 	this.populateTable = function() {
 
 		/* empty current table and append headers */
-		$("#" + this.id + " table").html(this.headers);
+		jQuery("#" + this.id + " table").html(this.headers);
 
 		/* Calculate the amount of items visible */
 		var amount = Math.min(this.tableData.length - (this.currentPage*this.itemsPerPage), this.itemsPerPage);
 
 		/* Add items to actual table */
 		for (var i = 0; i < amount; i++) {
-			$("#" + this.id + " table").append(this.tableData[(this.currentPage*this.itemsPerPage) + i]);
+			jQuery("#" + this.id + " table").append(this.tableData[(this.currentPage*this.itemsPerPage) + i]);
 		}
 	};
 
 	this.changePage = function(pageNum) {
 		this.currentPage = pageNum;
 
-		$("#" + this.id + ' .currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
+		jQuery("#" + this.id + ' .currentPage').html("Page " + (1 + this.currentPage) + " of " + Math.ceil(this.tableData.length/this.itemsPerPage));
 
 		if (this.currentPage === 0)
-			$("#" + this.id + ' .prevPage').addClass(Defaults.disabledClass);
+			jQuery("#" + this.id + ' .prevPage').addClass(Defaults.disabledClass);
 		else
-			$("#" + this.id + ' .prevPage').removeClass(Defaults.disabledClass);
+			jQuery("#" + this.id + ' .prevPage').removeClass(Defaults.disabledClass);
 
 		if (this.tableData.length <= (this.currentPage+1)*this.itemsPerPage)
-			$("#" + this.id + ' .nextPage').addClass(Defaults.disabledClass);
+			jQuery("#" + this.id + ' .nextPage').addClass(Defaults.disabledClass);
 		else
-			$("#" + this.id + ' .nextPage').removeClass(Defaults.disabledClass);
+			jQuery("#" + this.id + ' .nextPage').removeClass(Defaults.disabledClass);
 
 		this.populateTable();
 	};
 
 	/* Set initial page and show table */
 	this.changePage(this.currentPage);
-	$(document.getElementById(this.id)).show();
+	jQuery(document.getElementById(this.id)).show();
 
 };
 
-$(window).ready(function() {
-	/* create demo tables and store them on the window */
-	window.myTable1 = new Table('table1');
-	window.myTable2 = new Table('table2');
+jQuery(window).ready(function() {
+
+	/* init tables */
+	window.tables = window.tables || [];
+	
+	jQuery(".paginate-table").each(function(index, value) {
+		window.tables.push(new Table(jQuery(this).attr('id')));
+	});
 });
