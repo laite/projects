@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country data</title>
+    <meta charset="utf-8" />
+    <script src="./bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./app.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body ng-app="country">
+    <header>
+        <h1>Country selector</h1>
+    </header>
+    <main ng-controller="countryController">
+        Search: <input ng-model="countrySearch">
+        <ul class="countrylist">
+            <li ng-repeat="country in countries | filter:countrySearch">{{ country.name }}</li>
+        </ul>
+    </main>
+</body>
+</html>
