@@ -6,11 +6,11 @@ angular.module('country', [])
         function nameOrCodeFilter(data, searchWord) {
             if (!searchWord) return data;
 
-            data = data.filter(function(item) {
-                return ((item.name === searchWord) || (item.code === searchWord));
-            });
+            var expression = new RegExp(searchWord, 'i');
 
-            return data;
+            return data.filter(function(item) {
+                return (expression.test(item.name) || expression.test(item.code));
+            });
         }
 
         nameOrCodeFilter.$stateful = true;
