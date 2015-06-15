@@ -42,7 +42,9 @@ angular.module('country', [])
                 '<li> Population: {{ selectedCountry.population }} </li>' +
                 '</ul></div>',
             link: function(scope, element, attrs) {
-                console.log(scope.selectedCountry);
+                scope.showDetails = function() {
+                    element.removeClass('hidden');
+                };
             }
         };
     })
@@ -51,6 +53,7 @@ angular.module('country', [])
 
         $scope.countrySearch = "";
         $scope.selectedCountry = {};
+        $scope.showDetails = false;
 
         CountryList()
             .success(function(data) {
@@ -62,6 +65,7 @@ angular.module('country', [])
                 .success(function(data) {
                     data.name = country.name; // our API doesn't provide country name on detailed information
                     $scope.selectedCountry = data;
+                    $scope.showDetails();
                 });
         };
 

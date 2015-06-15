@@ -3,6 +3,7 @@
 <head>
     <title>Country data</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <script src="./bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="./app.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -12,7 +13,7 @@
     </header>
     <main>
         Search: <input ng-model="countrySearch">
-        <country-detail></country-detail>
+        <country-detail class="hidden"></country-detail>
         <ul class="countrylist">
             <li ng-click="selectCountry(country)" ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
         </ul>
