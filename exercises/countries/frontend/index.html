@@ -12,11 +12,15 @@
         <h1>Country selector</h1>
     </header>
     <main>
-        Search: <input ng-model="countrySearch">
+        <section>Search: <input ng-model="countrySearch"></section>
+        
+        <div class="countrylist">
+            <h3>Please select a country</h3>
+            <ul>
+                <li ng-click="selectCountry(country)" ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
+            </ul>
+        </div>
         <country-detail class="hidden"></country-detail>
-        <ul class="countrylist">
-            <li ng-click="selectCountry(country)" ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
-        </ul>
     </main>
     
 </body>

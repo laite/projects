@@ -1,5 +1,50 @@
 /* Style.css for country selector app */
 
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+}
+
 .hidden {
     display: none;
+}
+
+main {
+    padding: 55px;
+    margin: auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+main section {
+    display: block;
+    margin-bottom: 25px;
+}
+
+.countrylist {
+    display: inline-block;
+    width: 33%;
+    margin: 0;
+    vertical-align: top;
+}
+
+.countrylist ul {
+    list-style: none;
+}
+
+.countrylist li {
+    cursor: pointer;
+}
+
+.countrylist li:hover {
+    text-decoration: underline;
+}
+
+country-detail {
+    display: inline-block;
+    width: 66%;
+    vertical-align: top;
 }

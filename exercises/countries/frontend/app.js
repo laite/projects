@@ -53,7 +53,6 @@ angular.module('country', [])
 
         $scope.countrySearch = "";
         $scope.selectedCountry = {};
-        $scope.showDetails = false;
 
         CountryList()
             .success(function(data) {
@@ -65,7 +64,7 @@ angular.module('country', [])
                 .success(function(data) {
                     data.name = country.name; // our API doesn't provide country name on detailed information
                     $scope.selectedCountry = data;
-                    $scope.showDetails();
+                    $scope.showDetails(); // Toggle the <country-detail> directive visible
                 });
         };
 
