@@ -6,15 +6,16 @@
     <script src="./bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="./app.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<body ng-app="country">
+<body ng-app="country" ng-controller="countryController">
     <header>
         <h1>Country selector</h1>
     </header>
-    <main ng-controller="countryController">
+    <main>
         Search: <input ng-model="countrySearch">
         <ul class="countrylist">
-            <li ng-repeat="country in countries | filter:countrySearch">{{ country.name }}</li>
+            <li ng-repeat="country in countries | filter:nameOrCodeMatch">{{ country.name }}</li>
         </ul>
     </main>
+    
 </body>
 </html>
