@@ -13,7 +13,7 @@
     <main>
         Search: <input ng-model="countrySearch">
         <ul class="countrylist">
-            <li ng-repeat="country in countries | filter:nameOrCodeMatch">{{ country.name }}</li>
+            <li ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
         </ul>
     </main>
     
