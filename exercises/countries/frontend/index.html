@@ -12,8 +12,9 @@
     </header>
     <main>
         Search: <input ng-model="countrySearch">
+        <country-detail></country-detail>
         <ul class="countrylist">
-            <li ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
+            <li ng-click="selectCountry(country)" ng-repeat="country in countries | nameOrCodeMatch:countrySearch">{{ country.name }}</li>
         </ul>
     </main>
     
