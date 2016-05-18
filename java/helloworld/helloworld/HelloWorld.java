@@ -26,4 +26,8 @@ public class HelloWorld {
     System.out.println("Just kidding, here's your real friends:");
     showFriends.sayTheirNames(yourFriends.getFriends());
   }
+
+  interface FriendViewer {
+    void sayTheirNames(ArrayList<String> friends);
+  }
 }

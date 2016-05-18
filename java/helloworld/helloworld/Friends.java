@@ -23,7 +23,3 @@ public class Friends {
   }
 
 }
-
-interface FriendViewer {
-  void sayTheirNames(ArrayList<String> friends);
-}
