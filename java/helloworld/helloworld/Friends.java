@@ -6,21 +6,24 @@ public class Friends {
 
   ArrayList<String> friends = new ArrayList<>();
 
-  Friends(String[] friends) {
-    for (String f : friends) {
-      this.addFriend(f);
-    }
+  Friends(String[] originalFriends) {
+    friends = new ArrayList<String>(Arrays.asList(originalFriends));
+  }
+
+  Friends(ArrayList<String> originalFriends) {
+    friends = originalFriends;
   }
 
   public void addFriend (String friend) {
     friends.add(friend);
   }
 
-  public void showFriends() {
-    System.out.println("My friends are:");
-    for (String f : friends) {
-      System.out.println("  * " + f);
-    }
+  public ArrayList<String> getFriends() {
+    return friends;
   }
+
 }
 
+interface FriendViewer {
+  void sayTheirNames(ArrayList<String> friends);
+}
