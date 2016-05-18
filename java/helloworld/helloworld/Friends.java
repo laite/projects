@@ -14,8 +14,10 @@ public class Friends {
     friends = originalFriends;
   }
 
-  public void addFriend (String friend) {
-    friends.add(friend);
+  public void addFriends(String... friends) {
+    for (String friend : friends) {
+      this.friends.add(friend);
+    }
   }
 
   public ArrayList<String> getFriends() {
