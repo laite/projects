@@ -2,12 +2,11 @@ package helloworld;
 
 public class HelloWorld {
   public static void main (String[] args) {
-    System.out.println("Hello, World!");
 
-    Friends myFriends = new Friends();
+    String[] friends = { "Tim Tom", "That cute girl from the cafeteria", "Mom" };
 
-    myFriends.addFriends("Tim Tom");
-    myFriends.addFriends("That cute girl from the cafeteria");
+    Friends myFriends = new Friends(friends);
+
     myFriends.showFriends();
   }
 }
